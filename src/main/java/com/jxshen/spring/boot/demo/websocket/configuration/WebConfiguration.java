@@ -19,6 +19,8 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * 用SpringBoot应用，boot会自动注册默认的一些converters，用户只需要定制或者提供自定义的converter就行，
@@ -98,6 +100,8 @@ public class WebConfiguration {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         objectMapper.setDateFormat(sdf); // 设置自定义时间格式
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper.setLocale(Locale.getDefault());
+        objectMapper.setTimeZone(TimeZone.getDefault());
         jsonConverter.setObjectMapper(objectMapper);
         return jsonConverter;
     }
